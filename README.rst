@@ -3,6 +3,7 @@ IBM Disaster Recovery for Openstack
 ====
 
 Protect selected application(s) and their data, and upon disaster, recover in an alternative (existing) cloud.
+For more information on design and API please see doc folder
 
 Getting Started
 ---------------
