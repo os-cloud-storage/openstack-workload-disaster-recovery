@@ -1,0 +1,133 @@
+diff --git a/dragon/template/managers.py b/dragon/template/managers.py
+index 6af23ee..1fe8d92 100644
+--- a/dragon/template/managers.py
++++ b/dragon/template/managers.py
+@@ -24,15 +24,34 @@
+ from keystoneclient.v2_0 import client as keystone_client
+ from neutronclient.v2_0 import client as neutron_client
+ from novaclient.v1_1 import client as nova_client
++from novaclient import shell as novashell
++from dragon.openstack.common import log as logging
+ 
++LOG = logging.getLogger(__name__)
+ 
+ class KeystoneManager(object):
+     """Manages Keystone queries."""
+ 
+-    def __init__(self, username, password, project, auth_url, insecure):
+-        self.client = keystone_client.Client(
+-            username=username, password=password,
+-            tenant_name=project, auth_url=auth_url, insecure=insecure)
++    def __init__(self, username, password, project, auth_url,
++                 auth_token, insecure):
++        kwargs = {
++            'auth_url': auth_url,
++            'tenant_name': project,
++            'token': auth_token,
++            'insecure': insecure,
++            'project_name': project,
++            'endpoint': auth_url
++        }
++        self.client = keystone_client.Client(**kwargs)
++        kwargs_auth = {
++            'auth_url': auth_url,
++                'tenant_name': project,
++                'token': auth_token
++        }
++        self.client.authenticate(**kwargs_auth)
+ 
+     def get_token(self):
+         return self.client.auth_token
+@@ -46,14 +65,29 @@
+ 
+ 
+ class NeutronManager(object):
+-    def __init__(self, username, password, project, auth_url, insecure):
+-        self.client = neutron_client.Client(
+-            username=username, password=password,
+-            tenant_name=project, auth_url=auth_url,
+-            insecure=insecure)
+-        keystone_mgr = KeystoneManager(username, password, project,
+-                                       auth_url, insecure)
+-        self.project_id = keystone_mgr.get_project_id()
++    def __init__(self, username, password, project, auth_url,
++                 auth_token, insecure):
++        keystone = KeystoneManager(username, password, project, auth_url,
++                                   auth_token, insecure)
++
++        args = {
++            'auth_url': auth_url,
++            'service_type': 'network',
++            'token': auth_token,
++            'endpoint_url': keystone.get_endpoint(service_type='network'),
++            'insecure': insecure
++        }
++
++        self.client = neutron_client.Client(**args)
++        self.project_id = keystone.get_project_id()
+ 
+     def router_list(self):
+         return filter(self._owned_resource,
+@@ -89,9 +123,31 @@
+ class NovaManager(object):
+     """Manage nova resources."""
+ 
+-    def __init__(self, username, password, project, auth_url, insecure):
+-        self.client = nova_client.Client(username, password, project,
+-                                         auth_url, insecure=insecure)
++    def __init__(self, username, password, project, auth_url,
++                 auth_token, insecure):
++        computeshell = novashell.OpenStackComputeShell()
++        extensions = computeshell._discover_extensions("1.1")
++
++        args = {
++            'project_id': project,
++            'auth_url': auth_url,
++            'service_type': 'compute',
++            'username': None,
++            'api_key': None,
++            'extensions': extensions,
++            'insecure': insecure
++        }
++
++        self.client = nova_client.Client(**args)
++
++        keystone = KeystoneManager(username, password, project, auth_url,
++                                   auth_token, insecure)
++        management_url = keystone.get_endpoint(service_type='compute')
++        self.client.client.auth_token = auth_token
++        self.client.client.management_url = management_url
++
+ 
+     def server_list(self):
+         return self.client.servers.list()
+@@ -118,12 +174,28 @@
+ class CinderManager(object):
+     """Manage Cinder resources."""
+ 
+-    def __init__(self, username, password, project, auth_url, insecure):
+-        self.client = cinder_client.Client(username,
+-                                           password,
+-                                           project,
+-                                           auth_url,
+-                                           insecure=insecure)
++    def __init__(self, username, password, project, auth_url,
++                 auth_token, insecure):
++        args = {
++            'auth_url': auth_url,
++            'project_id': project,
++            'tenant_id': project,
++            'username': username,
++            'api_key': None
++        }
++
++        self.client = cinder_client.Client(**args)
++        keystone = KeystoneManager(username, password, project, auth_url,
++                                   auth_token, insecure)
++        management_url = keystone.get_endpoint(service_type='volume')
++        self.client.client.auth_token = auth_token
++        self.client.client.management_url = management_url
++
+ 
+     def volume_list(self):
+         volumes = []

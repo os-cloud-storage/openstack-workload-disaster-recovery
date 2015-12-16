@@ -1,0 +1,504 @@
+# Translations template for dragon.
+# Copyright (C) 2013 ORGANIZATION
+# This file is distributed under the same license as the dr project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: dragon jenkins.dragon.propose.translation.update.9\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2013-10-02 06:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+
+#: dragon/api/middleware/version_negotiation.py:49
+#, python-format
+msgid "Processing request: %(method)s %(path)s Accept: %(accept)s"
+msgstr ""
+
+#: dragon/api/middleware/version_negotiation.py:64
+#, python-format
+msgid "Matched versioned URI. Version: %(major_version)d.%(minor_version)d"
+msgstr ""
+
+#: dragon/api/middleware/version_negotiation.py:72
+#, python-format
+msgid ""
+"Unknown version in versioned URI: %(major_version)d.%(minor_version)d. "
+"Returning version choices."
+msgstr ""
+
+#: dragon/api/middleware/version_negotiation.py:88
+#, python-format
+msgid "Matched versioned media type. Version: %(major_version)d.%(minor_version)d"
+msgstr ""
+
+#: dragon/api/middleware/version_negotiation.py:94
+#, python-format
+msgid ""
+"Unknown version in accept header: "
+"%(major_version)d.%(minor_version)d...returning version choices."
+msgstr ""
+
+#: dragon/api/middleware/version_negotiation.py:102
+#, python-format
+msgid "Unknown accept header: %s...returning version choices."
+msgstr ""
+
+#: dragon/api/openstack/v1/dr.py:44 dragon/api/openstack/v1/dr.py:56
+#, python-format
+msgid "Not in valid format, missing container_name in POST body"
+msgstr ""
+
+#: dragon/api/openstack/v1/dr.py:87
+msgid "Not in valid format, missing tenant_id / resource name / resource type id in the parameters"
+msgstr ""
+
+#: dragon/api/openstack/v1/dr.py:107
+#, python-format
+msgid "Not in valid format, missing tenant_id / policy id in parameters"
+msgstr ""
+
+#: dragon/api/openstack/v1/dr.py:140
+#, python-format
+msgid "Not in valid format, missing workload_policy_id or action_id in parameters"
+msgstr ""
+#: dragon/common/auth_password.py:116
+msgid "Request missing required header X-Auth-Url"
+msgstr ""
+
+#: dragon/common/auth_password.py:121
+#, python-format
+msgid "Header X-Auth-Url \"%s\" not an allowed endpoint"
+msgstr ""
+
+#: dragon/common/config.py:36
+msgid "The flavor to use."
+msgstr ""
+
+#: dragon/common/config.py:38
+msgid "The API paste config file to use."
+msgstr ""
+
+#: dragon/common/config.py:74
+msgid "Select deferred auth method, stored password or trusts."
+msgstr ""
+
+#: dragon/common/config.py:88
+msgid "Allow orchestration of multiple clouds"
+msgstr ""
+
+#: dragon/common/config.py:91
+msgid "Allowed keystone endpoints for auth_uri when multi_cloud is enabled. At least one endpoint needs to be specified."
+msgstr ""
+
+#: dragon/common/config.py:98
+msgid "Type of endpoint in Identity service catalog to use for communication with the OpenStack service."
+msgstr ""
+                   
+#: dragon/common/config.py:101
+msgid "Optional CA cert file to use in SSL connections."
+msgstr ""
+
+#: dragon/common/config.py:103
+msgid "Optional PEM-formatted certificate chain file."
+msgstr ""
+
+#: dragon/common/config.py:105
+msgid "Optional PEM-formatted file that contains the private key."
+msgstr ""
+
+#: dragon/common/config.py:109
+msgid "If set, then the server's certificate will not be verified."
+msgstr ""
+
+#: dragon/common/custom_backend_auth.py:45
+msgid "Authenticating user token"
+msgstr ""
+
+#: dragon/common/custom_backend_auth.py:61
+msgid "Backend authentication failed"
+msgstr ""
+
+#: dragon/common/environment_format.py:39
+msgid "The environment is not a valid YAML mapping data type."
+msgstr ""
+
+#: dragon/common/environment_format.py:43
+#, python-format
+msgid "environment has wrong section \"%s\""
+msgstr ""
+
+#: dragon/common/exception.py:102
+msgid "An unknown exception occurred."
+msgstr ""
+
+#: dragon/common/exception.py:113 dragon/openstack/common/rpc/common.py:89
+msgid "Exception in string format operation"
+msgstr ""
+
+#: dragon/common/exception.py:128
+#, python-format
+msgid "Missing required credential: %(required)s"
+msgstr ""
+
+#: dragon/common/exception.py:132
+#, python-format
+msgid ""
+"Incorrect auth strategy, expected \"%(expected)s\" but received "
+"\"%(received)s\""
+msgstr ""
+
+#: dragon/common/exception.py:137
+#, python-format
+msgid "Connect error/bad request to Auth service at URL %(url)s."
+msgstr ""
+
+#: dragon/common/exception.py:141
+#, python-format
+msgid "Auth service at URL %(url)s not found."
+msgstr ""
+
+#: dragon/common/exception.py:145
+msgid "Authorization failed."
+msgstr ""
+
+#: dragon/common/exception.py:149
+msgid "You are not authenticated."
+msgstr ""
+
+#: dragon/common/exception.py:153 dragon/common/exception.py:158
+msgid "You are not authorized to complete this action."
+msgstr ""
+
+#: dragon/common/exception.py:162
+#, python-format
+msgid "Data supplied was not valid: %(reason)s"
+msgstr ""
+
+#: dragon/common/exception.py:166
+#, python-format
+msgid "Redirecting to %(uri)s for authorization."
+msgstr ""
+
+#: dragon/common/exception.py:170
+msgid "There was an error configuring the client."
+msgstr ""
+
+#: dragon/common/exception.py:174
+msgid "The URI was too long."
+msgstr ""
+
+#: dragon/common/exception.py:178
+#, python-format
+msgid ""
+"The request returned 500 Internal Server Error\n"
+"\n"
+"The response body:\n"
+"%(body)s"
+msgstr ""
+
+#: dragon/common/exception.py:183
+#, python-format
+msgid "Maximum redirects (%(redirects)s) was exceeded."
+msgstr ""
+
+#: dragon/common/exception.py:187
+msgid "Received invalid HTTP redirect."
+msgstr ""
+
+#: dragon/common/exception.py:191
+msgid "Response from Keystone does not contain a dragon endpoint."
+msgstr ""
+
+#: dragon/common/exception.py:195
+#, python-format
+msgid ""
+"Multiple 'image' service matches for region %(region)s. This generally "
+"means that a region is required and you have not supplied one."
+msgstr ""
+
+#: dragon/common/exception.py:201
+#, python-format
+msgid "The Parameter (%(key)s) was not provided."
+msgstr ""
+
+#: dragon/common/exception.py:205
+#, python-format
+msgid "The specified reference \"%(resource)s\" (in %(key)s) is incorrect."
+msgstr ""
+
+#: dragon/common/exception.py:209
+#, python-format
+msgid "The Key (%(key_name)s) could not be found."
+msgstr ""
+
+#: dragon/common/exception.py:213
+#, python-format
+msgid "The Flavor ID (%(flavor_id)s) could not be found."
+msgstr ""
+
+#: dragon/common/exception.py:217
+#, python-format
+msgid "The Image (%(image_name)s) could not be found."
+msgstr ""
+
+#: dragon/common/exception.py:221
+#, python-format
+msgid "Multiple images were found with name (%(image_name)s)."
+msgstr ""
+
+#: dragon/common/exception.py:225
+#, python-format
+msgid "Searching Tenant %(target)s from Tenant %(actual)s forbidden."
+msgstr ""
+
+#: dragon/common/exception.py:230
+#, python-format
+msgid Action (%(action)s) could not be found or could not be loaded."
+msgstr ""
+
+#: dragon/common/exception.py:234
+#, python-format
+msgid "Heat stack creation failed (%(reason)s) "
+msgstr ""
+
+#: dragon/common/exception.py:238
+#, python-format
+msgid "Connection to swift failed: %(reason)s"
+msgstr ""
+
+#: dragon/common/exception.py:256
+#, python-format
+msgid "%(feature)s is not supported."
+msgstr ""
+
+#: dragon/common/exception.py:279
+#, python-format
+msgid "Invalid content type %(content_type)s"
+msgstr ""
+
+#: dragon/common/exception.py:383
+#, python-format
+msgid "Request limit exceeded: %(message)s"
+msgstr ""
+
+
+#: dragon/common/dragon_keystoneclient.py:161
+msgid "Keystone v3 API connection failed, no password trust or auth_token!"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:172
+msgid "trust token re-scoping failed!"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:262
+#, python-format
+msgid "Truncating the username %s to the last 64 characters."
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:296
+#: dragon/common/dragon_keystoneclient.py:337
+#, python-format
+msgid "Adding user %(user)s to role %(role)s"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:301
+#: dragon/common/dragon_keystoneclient.py:342
+#, python-format
+msgid "Failed to add user %(user)s to role %(role)s, check role exists!"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:305
+#: dragon/common/dragon_keystoneclient.py:345
+#, python-format
+msgid "Can't find role %s"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:321
+msgid ""
+"Falling back to legacy non-domain user create, configure domain in "
+"dragon.conf"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:354
+#, python-format
+msgid "User %s in invalid domain"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:356
+#, python-format
+msgid "User %s in invalid project"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:362
+msgid ""
+"Falling back to legacy non-domain user delete, configure domain in "
+"dragon.conf"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:376
+#: dragon/common/dragon_keystoneclient.py:393
+msgid "Falling back to legacy non-domain project, configure domain in dragon.conf"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:460
+#: dragon/common/dragon_keystoneclient.py:477
+msgid "Falling back to legacy non-domain keypair, configure domain in dragon.conf"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:496
+msgid "Falling back to legacy non-domain disable, configure domain in dragon.conf"
+msgstr ""
+
+#: dragon/common/dragon_keystoneclient.py:506
+msgid "Falling back to legacy non-domain enable, configure domain in dragon.conf"
+msgstr ""
+
+#: dragon/common/timeutils.py:33
+msgid "Only ISO 8601 duration format of the form PT#H#M#S is supported."
+msgstr ""
+
+#: dragon/common/urlfetch.py:42
+#, python-format
+msgid "Fetching data from %s"
+msgstr ""
+
+#: dragon/common/urlfetch.py:47
+#, python-format
+msgid "Invalid URL scheme %s"
+msgstr ""
+
+#: dragon/common/urlfetch.py:53 dragon/common/urlfetch.py:77
+#, python-format
+msgid "Failed to retrieve template: %s"
+msgstr ""
+
+#: dragon/common/wsgi.py:56 dragon/common/wsgi.py:90 dragon/common/wsgi.py:124
+msgid ""
+"Address to bind the server. Useful when selecting a particular network "
+"interface."
+msgstr ""
+
+#: dragon/common/wsgi.py:60 dragon/common/wsgi.py:94 dragon/common/wsgi.py:128
+msgid "The port on which the server will listen."
+msgstr ""
+
+#: dragon/common/wsgi.py:63 dragon/common/wsgi.py:97 dragon/common/wsgi.py:131
+msgid "Number of backlog requests to configure the socket with."
+msgstr ""
+
+#: dragon/common/wsgi.py:67 dragon/common/wsgi.py:101 dragon/common/wsgi.py:135
+msgid "Location of the SSL certificate file to use for SSL mode."
+msgstr ""
+
+#: dragon/common/wsgi.py:71 dragon/common/wsgi.py:105 dragon/common/wsgi.py:139
+msgid "Location of the SSL key file to use for enabling SSL mode."
+msgstr ""
+
+#: dragon/common/wsgi.py:75 dragon/common/wsgi.py:109 dragon/common/wsgi.py:143
+msgid "Number of workers for dragon service."
+msgstr ""
+
+#: dragon/common/wsgi.py:78 dragon/common/wsgi.py:112
+msgid ""
+"Maximum line size of message headers to be accepted. max_header_line may "
+"need to be increased when using large tokens (typically those generated "
+"by the Keystone v3 API with big service catalogs)."
+msgstr ""
+
+#: dragon/common/wsgi.py:146
+msgid ""
+"Maximum line size of message headers to be accepted. max_header_line may "
+"need to be increased when using large tokens (typically those generated "
+"by the Keystone v3 API with big service catalogs.)"
+msgstr ""
+
+#: dragon/common/wsgi.py:206 dragon/openstack/common/sslutils.py:59
+msgid ""
+"When running server in SSL mode, you must specify both a cert_file and "
+"key_file option value in your configuration file"
+msgstr ""
+
+#: dragon/common/wsgi.py:224
+#, python-format
+msgid "Could not bind to %(bind_addr)safter trying for 30 seconds"
+msgstr ""
+
+#: dragon/common/wsgi.py:256
+msgid "SIGTERM received"
+msgstr ""
+
+#: dragon/common/wsgi.py:265
+msgid "SIGHUP received"
+msgstr ""
+
+#: dragon/common/wsgi.py:281 dragon/openstack/common/service.py:337
+#, python-format
+msgid "Starting %d workers"
+msgstr ""
+
+#: dragon/common/wsgi.py:292
+#, python-format
+msgid "Removing dead child %s"
+msgstr ""
+
+#: dragon/common/wsgi.py:299
+msgid "Caught keyboard interrupt. Exiting."
+msgstr ""
+
+#: dragon/common/wsgi.py:303
+msgid "Exited"
+msgstr ""
+
+#: dragon/common/wsgi.py:321
+#, python-format
+msgid "Child %d exiting normally"
+msgstr ""
+
+#: dragon/common/wsgi.py:324
+#, python-format
+msgid "Started child %s"
+msgstr ""
+
+#: dragon/common/wsgi.py:347
+msgid "Starting single process server"
+msgstr ""
+
+#: dragon/common/wsgi.py:554
+#, python-format
+msgid ""
+"JSON body size (%(len)s bytes) exceeds maximum allowed size (%(limit)s "
+"bytes)."
+msgstr ""
+
+#: dragon/common/wsgi.py:680
+#, python-format
+msgid "Exception handling resource: %s"
+msgstr ""
+
+#: dragon/common/wsgi.py:681
+msgid ""
+"The server could not comply with the request since\r\n"
+"it is either malformed or otherwise incorrect.\r\n"
+msgstr ""
+
+#: dragon/common/wsgi.py:697
+#, python-format
+msgid "Returning %(code)s to user: %(explanation)s"
+msgstr ""
+
+#: dragon/common/wsgi.py:737
+msgid "Unable to serialize exception response"
+msgstr ""
+
+#: dragon/common/wsgi.py:772
+#, python-format
+msgid "Unexpected error occurred serving API: %s"
+msgstr ""

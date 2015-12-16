@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Disaster Recovery - Manage Resources" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Disaster Recovery - Manage Resources") %}
+{% endblock page_header %}
+
+{% block main %}   
+  <dl>
+    <dt>{% trans "Name" %}</dt>
+    <dd><a href="/project/draas/policy/{{ policy.id }}">{{ policy.name|default:_("None") }}</a></dd>
+    <dt>{% trans "ID" %}</dt>
+    <dd>{{ policy.id|default:_("None") }}</dd>    
+  </dl>
+
+   <div class="resources">
+	{{ resources_table.render }}
+   </div>   
+{% endblock %}
+

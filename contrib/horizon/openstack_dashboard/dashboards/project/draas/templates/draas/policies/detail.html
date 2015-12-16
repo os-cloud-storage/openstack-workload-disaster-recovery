@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Disaster Recovery - Protect Workload" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Policy Detail: ")|add:policy.name %}
+{% endblock page_header %}
+
+{% block main %}
+	<h3>{% trans "Workflow Protection Policy Overview" %}</h3>
+
+  <dl>
+    <dt>{% trans "Name" %}</dt>
+    <dd>{{ policy.name|default:_("None") }}</dd>
+    <dt>{% trans "ID" %}</dt>
+    <dd>{{ policy.id|default:_("None") }}</dd>    
+  </dl>
+
+
+   <div class="resources">
+	{{ resources_table.render }}
+   </div> 
+   <div class="executions">
+	{{ executions_table.render }}
+   </div>  
+{% endblock %}
+

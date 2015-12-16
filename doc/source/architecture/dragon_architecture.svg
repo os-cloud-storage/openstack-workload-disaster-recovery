@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="334.13525"
+   height="322.79993"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="dragon_architecture.svg"
+   inkscape:export-filename="/home/tof/workspace/dr/ibm-openstack-dr/docs/dragon_architecture.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutL"
+       style="overflow:visible">
+      <path
+         id="path4228"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="scale(0.8,0.8)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend"
+       style="overflow:visible">
+      <path
+         id="path4113"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible">
+      <path
+         id="path4095"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect4528"
+       is_visible="true"
+       pattern="m -0.65630356,0 1,0"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible">
+      <path
+         id="path4089"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect4070"
+       is_visible="true"
+       pattern="M 0,0 1,0"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <linearGradient
+       id="linearGradient3812">
+      <stop
+         style="stop-color:#001ddc;stop-opacity:1;"
+         offset="0"
+         id="stop3814" />
+      <stop
+         style="stop-color:#000022;stop-opacity:0.19607843;"
+         offset="1"
+         id="stop3816" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3804">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop3806" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop3808" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3790">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop3792" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop3794" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3784">
+      <stop
+         id="stop3786"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1;" />
+      <stop
+         id="stop3788"
+         offset="1"
+         style="stop-color:#000000;stop-opacity:0;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3776">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop3778" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop3780" />
+    </linearGradient>
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutL-9"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4228-9"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="scale(0.8,0.8)" />
+    </marker>
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect4528-8"
+       is_visible="true"
+       pattern="m -1.5152252,59.463816 0.99999998,0"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutL-0"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4228-92"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="scale(0.8,0.8)" />
+    </marker>
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect4528-8-9"
+       is_visible="true"
+       pattern="m -52.022852,113.80172 1,0"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutL-09"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4228-91"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="scale(0.8,0.8)" />
+    </marker>
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect4528-8-1"
+       is_visible="true"
+       pattern="m 53.033012,114.81187 1,0"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutL-4"
+       style="overflow:visible">
+      <path
+         id="path4228-6"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="scale(0.8,0.8)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect4528-9"
+       is_visible="true"
+       pattern="m -106.64902,173.32089 1,0"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="166.14279"
+     inkscape:cy="173.24476"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1615"
+     inkscape:window-height="932"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     showguides="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3006"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="-102.17334px"
+       originy="-561.24489px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-102.17334,-168.31737)"
+     style="opacity:1">
+    <g
+       id="g4019"
+       transform="translate(-0.35383606,0)">
+      <rect
+         ry="6.7922091"
+         y="168.81737"
+         x="161.24294"
+         height="77.241875"
+         width="274.91949"
+         id="rect3004"
+         style="fill:none;stroke:#000000;stroke-width:0.99999994000000003;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3828"
+         y="189.34581"
+         x="293.44098"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           style="text-align:center;text-anchor:middle"
+           y="189.34581"
+           x="293.44098"
+           id="tspan3830"
+           sodipodi:role="line">Dragon User Interface</tspan><tspan
+           style="text-align:center;text-anchor:middle"
+           id="tspan3832"
+           y="204.34581"
+           x="293.44098"
+           sodipodi:role="line">(Horizon extension)</tspan></text>
+    </g>
+    <g
+       id="g4014"
+       transform="translate(0.15124512,0)">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:1.00000011999999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect3860"
+         width="165.22345"
+         height="31.532452"
+         x="215.58588"
+         y="214.65305"
+         ry="2.7727833" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3876"
+         y="236.15894"
+         x="249.50768"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+         xml:space="preserve"><tspan
+           y="236.15894"
+           x="249.50768"
+           id="tspan3878"
+           sodipodi:role="line">Dragon Client Lib</tspan></text>
+    </g>
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutL)"
+       d="m 298.34885,245.2503 0,37.23306"
+       id="path4526"
+       inkscape:path-effect="#path-effect4528"
+       inkscape:original-d="m 298.34885,245.2503 0,37.23306 0,0"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g5185"
+       transform="translate(0.35383606,0)">
+      <g
+         transform="translate(0,-6)"
+         id="g3902">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           id="rect3004-8"
+           width="236.02863"
+           height="34.815468"
+           x="180.68837"
+           y="293.24991"
+           ry="3.0614731" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+           x="250.48296"
+           y="313.94067"
+           id="text3898"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3900"
+             x="250.48296"
+             y="313.94067">Dragon REST API</tspan></text>
+      </g>
+      <g
+         transform="translate(0,-6)"
+         id="g4009">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           id="rect3004-8-6"
+           width="236.02863"
+           height="34.815468"
+           x="180.68837"
+           y="348.05072"
+           ry="3.0614731" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+           x="258.42535"
+           y="368.74149"
+           id="text3898-5"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3900-7"
+             x="258.42535"
+             y="368.74149">Dragon Engine</tspan></text>
+      </g>
+      <g
+         transform="translate(21.71828,-10.545687)"
+         id="g3959">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           id="rect3004-8-6-8"
+           width="78.949905"
+           height="34.815468"
+           x="183.46628"
+           y="404.40109"
+           ry="3.0614731" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+           x="193.09653"
+           y="424.84106"
+           id="text3955"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3957"
+             x="193.09653"
+             y="424.84106">Dragon DB</tspan></text>
+      </g>
+      <g
+         transform="translate(57.073619,106.63201)"
+         id="g4029">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+           id="rect3004-8-6-9"
+           width="93.597107"
+           height="34.815468"
+           x="-345.50122"
+           y="286.97086"
+           ry="3.0614731"
+           transform="scale(-1,1)" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+           x="260.7486"
+           y="307.4108"
+           id="text4025"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan4027"
+             x="260.7486"
+             y="307.4108">Plugin Actions</tspan></text>
+      </g>
+      <rect
+         ry="14.653402"
+         y="275.88574"
+         x="160.53526"
+         height="166.64038"
+         width="274.91949"
+         id="rect3004-1"
+         style="fill:none;stroke:#000000;stroke-width:0.99999994000000003;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         inkscape:connector-curvature="0"
+         inkscape:original-d="m 297.48992,322.39179 0,15.26793 0,0"
+         inkscape:path-effect="#path-effect4528-8"
+         id="path4526-6"
+         d="m 297.48992,322.39179 0,15.26793"
+         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutL)" />
+      <path
+         inkscape:connector-curvature="0"
+         inkscape:original-d="m 246.9823,376.72969 0,12.55316 0,0"
+         inkscape:path-effect="#path-effect4528-8-9"
+         id="path4526-6-1"
+         d="m 246.9823,376.72969 0,12.55316"
+         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.99999994000000003;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutL)" />
+      <path
+         inkscape:connector-curvature="0"
+         inkscape:original-d="m 352.03816,377.73984 0,11.77751 0,0"
+         inkscape:path-effect="#path-effect4528-8-1"
+         id="path4526-6-8"
+         d="m 352.03816,377.73984 0,11.77751"
+         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutL)" />
+    </g>
+    <rect
+       ry="2.7727833"
+       y="459.08484"
+       x="102.67334"
+       height="31.532452"
+       width="165.22345"
+       id="rect3860-6"
+       style="fill:none;stroke:#000000;stroke-width:1.00000011999999994;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       x="136.59514"
+       y="480.59073"
+       id="text3876-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3878-4"
+         x="136.59514"
+         y="480.59073">OpenStack APIs</tspan></text>
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.99999994000000003;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutL)"
+       d="m 192.35613,377.15492 0,77.40922"
+       id="path4526-5"
+       inkscape:path-effect="#path-effect4528-9"
+       inkscape:original-d="m 192.35613,377.15492 0,77.40922 0,0"
+       inkscape:connector-curvature="0" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot5264"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       transform="translate(102.17334,168.31737)"><flowRegion
+         id="flowRegion5266"><rect
+           id="rect5268"
+           width="42.426407"
+           height="12.121831"
+           x="202.0305"
+           y="158.14507" /></flowRegion><flowPara
+         id="flowPara5270">RPS</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial;-inkscape-font-specification:Arial"
+       x="306.22415"
+       y="336.05887"
+       id="text5272"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5274"
+         x="306.22415"
+         y="336.05887">RPC</tspan></text>
+  </g>
+</svg>

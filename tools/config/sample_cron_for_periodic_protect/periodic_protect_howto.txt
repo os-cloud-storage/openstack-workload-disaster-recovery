@@ -1,0 +1,10 @@
+To run  dragon protect on a peridoc basis:
+
+1. run ./dragon_prepare_periodic_protect.sh . Usage will be printed as follows:
+Usage : ./dragon_prepare_periodic_protect.sh <workload_id> [--consistent true/false] [cron time string (see crontab example) default: midnight daily i.e '0 0 * * * ']
+
+rerun ./dragon_prepare_periodic_protect.sh with the correct parameters . Note : the last 2 parameters are optional
+
+2. setp 1 generates /etc/cron.d/dragon_protect_periodic 
+   This file defines the time frame and period  within which  a shell script named '/root/dragon_periodic_protect.sh'
+   will run to do  a dargon protect of the specified  <workload_id>  from step 1.

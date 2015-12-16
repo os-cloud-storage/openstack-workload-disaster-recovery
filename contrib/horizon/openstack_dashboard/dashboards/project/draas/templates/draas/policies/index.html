@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Disaster Recovery - Protect Workload" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Disaster Recovery - Workload Protection Policies") %}
+{% endblock page_header %}
+
+{% block main %}
+   <div class="policies">
+	{{ policies_table.render }}
+   </div>  
+{% endblock %}
+

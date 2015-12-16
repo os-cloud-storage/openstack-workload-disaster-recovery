@@ -1,0 +1,9 @@
+[Unit]
+Description=OpenStack dr API Service
+After=syslog.target network.target
+[Service]
+Type=simple
+User=dragon
+ExecStart=/usr/bin/dragon-api --config-file /etc/dragon/dragon.conf --logfile /var/log/dragon/api.log
+[Install]
+WantedBy=multi-user.target

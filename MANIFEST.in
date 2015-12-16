@@ -1,0 +1,14 @@
+include AUTHORS
+include ChangeLog
+include README.rst
+include MANIFEST.in pylintrc
+include openstack-common.conf
+include babel.cfg run_tests.sh tox.ini
+include dragon/db/sqlalchemy/migrate_repo/migrate.cfg
+include dragon/db/sqlalchemy/migrate_repo/README
+include dragon/openstack/common/README
+global-exclude *.pyc
+prune dragon/contrib
+graft etc
+graft docs
+graft tools

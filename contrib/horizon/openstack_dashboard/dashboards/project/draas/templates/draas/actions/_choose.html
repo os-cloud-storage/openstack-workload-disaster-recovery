@@ -1,0 +1,21 @@
+{% extends "horizon/common/_modal_form.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block form_id %}enable_dr_form{% endblock %}
+{% block form_action %}{% url 'horizon:project:draas:edit_action_post'%}{% endblock %}
+{% block modal-header %}{% trans "Choose action:" %}{% endblock %}
+
+{% block modal-body %}
+<div class="left">
+    <fieldset>
+    {% include "horizon/common/_form_fields.html" %}
+    </fieldset>
+</div>
+
+{% endblock %}
+
+{% block modal-footer %}
+  <input class="btn btn-primary pull-right" type="submit" value="{% trans "Submit" %}" />
+  <a href="{% url 'horizon:project:draas:index' %}" class="btn secondary cancel close">{% trans "Cancel" %}</a>
+{% endblock %}

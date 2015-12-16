@@ -1,0 +1,40 @@
+diff --git a/dragon/template/flame.py b/dragon/template/flame.py
+index 6829b68..a5e42a5 100644
+--- a/dragon/template/flame.py
++++ b/dragon/template/flame.py
+@@ -572,10 +572,10 @@
+                     "Snapshot to create volume %s from" % resource_name)
+                 self.add_parameter(key, description, 'string',
+                                    default=volume.snapshot_id)
+-            if volume.display_name:
+-                properties['name'] = volume.display_name
+-            if volume.display_description:
+-                properties['description'] = volume.display_description
++            if volume.name:
++                properties['name'] = volume.name
++            if volume.description:
++                properties['description'] = volume.description
+             if volume.volume_type and volume.volume_type != 'None':
+                 key = "%s_volume_type" % resource_name
+                 description = (
+diff --git a/dragon/template/managers.py b/dragon/template/managers.py
+index f7d954f..c20ca16 100644
+--- a/dragon/template/managers.py
++++ b/dragon/template/managers.py
+@@ -20,7 +20,7 @@
+ # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ # SOFTWARE.
+ 
+-from cinderclient.v1 import client as cinder_client
++from cinderclient.v2 import client as cinder_client
+ from keystoneclient.v2_0 import client as keystone_client
+ from neutronclient.v2_0 import client as neutron_client
+ from novaclient.v1_1 import client as nova_client
+@@ -189,7 +189,7 @@
+         self.client = cinder_client.Client(**args)
+         keystone = KeystoneManager(username, password, project, auth_url,
+                                    auth_token, insecure)
+-        management_url = keystone.get_endpoint(service_type='volume')
++        management_url = keystone.get_endpoint(service_type='volumev2')
+         self.client.client.auth_token = auth_token
+         self.client.client.management_url = management_url
