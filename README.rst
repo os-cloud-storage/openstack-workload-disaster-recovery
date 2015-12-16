@@ -10,13 +10,17 @@ Getting Started
 
 If you'd like to run from the master branch, you can clone the git repo:
 
-    https://github.rtp.raleigh.ibm.com/openstack-ext/ibm-openstack-dr
+    https://github.com/os-cloud-storage/openstack-workload-disaster-recovery
 
 
 * Developer docs: 
-
+For more information on design and API please see doc folder
 
 Python client
 -------------
-https://github.rtp.raleigh.ibm.com/openstack-ext/ibm-openstack-dr-client
+https://github.com/os-cloud-storage/openstack-workload-disaster-recovery-client
 
+
+For more information contact
+Oshrit Feder, IBM, oshritf@il.ibm.com
+Ronen Kat, IBM, ronenkat@il.ibm.com
