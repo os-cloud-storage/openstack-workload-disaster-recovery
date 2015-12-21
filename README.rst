@@ -21,6 +21,13 @@ Python client
 https://github.com/os-cloud-storage/openstack-workload-disaster-recovery-client
 
 
-For more information contact
+For more information contact:
+
 Oshrit Feder, IBM, oshritf@il.ibm.com
+
 Ronen Kat, IBM, ronenkat@il.ibm.com
+
+Kalman Meth, IBM, meth@il.ibm.com 
+
+
+The project was partially funded by EU Grant Agreement 609828, Orbit project, http://www.orbitproject.eu/ 
