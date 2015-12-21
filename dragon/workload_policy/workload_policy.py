@@ -221,8 +221,6 @@ class WorkloadPolicy(object):
         stack_obj = heat.resources
         stack_events = heat.events
         for stack_resource in stack_resources:
-            #  if static_resource_type_mapping.has_key(stack_resource.
-            #  resource_type):
             if stack_resource.resource_type in static_resource_type_mapping:
                 resource_events =\
                     stack_events.list(stack_id,
@@ -360,7 +358,7 @@ class WorkloadPolicy(object):
         # Create DB entries for tenant (restore from metadata)
         WorkloadPolicy._restoreMetadataDB(context, actions,
                                           stack_created_resources)
-        # clean stack - decided to be admin manuall
+        # clean stack - decided to be admin manual
 
         return policy_status
 
