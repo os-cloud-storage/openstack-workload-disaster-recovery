@@ -28,6 +28,7 @@ class HeatTemplate(object):
         self.cntx = context
         self._instances = []
         self._volumes = []
+        self._replicated_volumes = []
         self._keypairs = []
 
     def add_instance(self, instance):
@@ -35,6 +36,9 @@ class HeatTemplate(object):
 
     def add_volume(self, volume):
         self._volumes.append(volume)
+
+    def add_replicated_volume(self, volume):
+        self._replicated_volumes.append(volume)
 
     def add_keypair(self, keypair):
         self._keypairs.append(keypair)
@@ -58,8 +62,16 @@ class HeatTemplate(object):
     def get_volumes(self):
         return self._volumes
 
+    def get_replicated_volumes(self):
+        return self._replicated_volumes
+
     def get_volume(self, name):
         for volume in self._volumes:
+            if volume.name == name:
+                return volume
+
+    def get_replicated_volume(self, name):
+        for volume in self._replicated_volumes:
             if volume.name == name:
                 return volume
 
@@ -81,12 +93,13 @@ class KeyPairResource(TemplateResource):
 class InstanceResource(TemplateResource):
 
     def __init__(self, image_snap_id, inst_name, flavor_name=None,
-                 networks=None, security_groups=None,):
+                 networks=None, security_groups=None, resource_id=None):
         self._snap_id = image_snap_id
         self._inst_name = inst_name
         self._flavor_name = flavor_name
         self._networks = networks
         self._security_groups = security_groups
+        self._resource_id = resource_id
 
     @property
     def image_snapshot_id(self):
@@ -101,6 +114,10 @@ class InstanceResource(TemplateResource):
         return self._flavor_name
 
     @property
+    def resource_id(self):
+        return self._resource_id
+
+    @property
     def networks(self):
         return self._networks
 
@@ -111,7 +128,7 @@ class InstanceResource(TemplateResource):
 
 class VolumeResource(TemplateResource):
 
-    def __init__(self, name, id1, backup_id):
+    def __init__(self, name, id1):
         self._name = name
         self._id = id1
 
@@ -135,6 +152,6 @@ class HeatVolumeResource(VolumeResource):
         return self._backup_id
 
 
-class ParamVolumeResource(VolumeResource):
+class ReplicatedVolumeResource(VolumeResource):
     def __init__(self, name, id1):
         super(self.__class__, self).__init__(name, id1)

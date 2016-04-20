@@ -46,7 +46,7 @@ def get_global_container_name(tenant_name, policy_name):
 
 def get_policy_name_and_timestamp_from_container(tenant_name, container_name):
     policy_regex = re.compile(r"^" + tenant_name +
-                              "_([a-zA-Z0-9_]+)_([0-9]+)$")
+                              "_([a-zA-Z0-9_\.]+)_([0-9]+)$")
     match = policy_regex.match(container_name)
     if match:
         timestamp = timeutils.parse_strtime(match.group(2), fmt="%Y%m%d%H%M%S")
@@ -109,6 +109,7 @@ class WorkloadPolicy(object):
             metadata = {}
             metadata["workload_policy_name"] = self.name
             policy_status = True
+            LOG.debug("workload_policy protect, policy_status = %s" %(policy_status))
             metadata["actions"] = []
             for db_action in self.actions:
                 try:
@@ -127,7 +128,9 @@ class WorkloadPolicy(object):
                                            db_action.resource.id,
                                            action_container_name)
 
+                    LOG.debug("workload_policy protect, status = %s" %(status))
                     policy_status = policy_status and (status == "Protected")
+                    LOG.debug("workload_policy protect, policy_status = %s" %(policy_status))
 
                     action_obj.generate_template(cnxt, template_generator)
 
@@ -148,7 +151,7 @@ class WorkloadPolicy(object):
                     exc = sys.exc_info()
                     LOG.error(traceback.format_exception(*exc))
                     LOG.error("resource %s could not be protected using action"
-                              "%s. Verify that the resource is a valid Nova"
+                              "%s. Verify that the resource is a valid "
                               " resource"
                               % (db_action.resource.id, db_action.action.name))
         except Exception, e:
@@ -162,6 +165,7 @@ class WorkloadPolicy(object):
                 except Exception, ex:
                     LOG.debug(ex)
 
+            LOG.debug("workload_policy protect, policy_status = %s" %(policy_status))
             if policy_status:
                 status = "Protected"  # TODO(Oshrit): change to final
             else:
@@ -207,6 +211,7 @@ class WorkloadPolicy(object):
     @staticmethod
     def _post_heat_stack_creation(context, heat, stack_id):
         static_resource_type_mapping = {"OS::Cinder::Volume": "volume",
+                                        "OS::Cinder::VolumeAttachment": "volume",
                                         "OS::Nova::Server": "instance"}
         mapping = {}
         stack_status = heat.stacks.get(stack_id)
@@ -214,22 +219,29 @@ class WorkloadPolicy(object):
         while (stack_status.stack_status == "CREATE_IN_PROGRESS"):
             greenthread.sleep(5)
             stack_status = heat.stacks.get(stack_id)
+            LOG.debug("stack status %s" % stack_status)
         if (stack_status.stack_status != "CREATE_COMPLETE"):
             raise exception.OrchestrationError(reason=stack_status.
                                                stack_status_reason)
         stack_resources = heat.resources.list(stack_id)
         stack_obj = heat.resources
         stack_events = heat.events
+        LOG.debug("stack_resources %s" % (stack_resources))
         for stack_resource in stack_resources:
+            #  if static_resource_type_mapping.has_key(stack_resource.
+            #  resource_type):
             if stack_resource.resource_type in static_resource_type_mapping:
                 resource_events =\
                     stack_events.list(stack_id,
                                       stack_resource.resource_name)
+                LOG.debug("resource_events %s" % (resource_events))
                 for resource_event in resource_events:
+                    LOG.debug("resource_event %s" % (resource_event))
                     resource_event_data =\
                         stack_events.get(stack_id,
                                          stack_resource.resource_name,
                                          resource_event.id)
+                    LOG.debug("resource_event_data %s" % (resource_event_data))
 
                     if resource_event.resource_status == "CREATE_COMPLETE":
                         resource_name =\
@@ -239,6 +251,7 @@ class WorkloadPolicy(object):
                         mapping[(resource_name,
                                  static_resource_type_mapping[rt])] =\
                             stack_resource.physical_resource_id
+        LOG.debug("mapping %s" % (mapping))
         return mapping
 
     @staticmethod
@@ -315,7 +328,7 @@ class WorkloadPolicy(object):
             policy_status = False
             LOG.debug(e)
             LOG.error("resource %s could not be recovered using action %s."
-                      "Verify that the resource is a valid Nova resource"
+                      "Verify that the resource is a valid resource"
                       % (db_action["id"], db_action["name"]))
 
         if not policy_status:
@@ -339,7 +352,8 @@ class WorkloadPolicy(object):
 
         fields = {
             'stack_name': stack_name,
-            'timeout_mins': 15,
+            #'timeout_mins': 15,
+            'timeout_mins': 2,
             'disable_rollback': True,
             # 'parameters': dict(params_list),
             'password': "passw0rd"
@@ -350,15 +364,16 @@ class WorkloadPolicy(object):
         stack = Clients(context).heat().stacks.create(**fields)
 
         # Wait for template to complete
-        stack_created_resources =\
-            WorkloadPolicy._post_heat_stack_creation(context,
-                                                     Clients(context).heat(),
-                                                     stack["stack"]["id"])
-
-        # Create DB entries for tenant (restore from metadata)
-        WorkloadPolicy._restoreMetadataDB(context, actions,
-                                          stack_created_resources)
-        # clean stack - decided to be admin manual
+        # temporarily comment out these actions; have problem with VolumeAttachment
+#         stack_created_resources =\
+#             WorkloadPolicy._post_heat_stack_creation(context,
+#                                                      Clients(context).heat(),
+#                                                      stack["stack"]["id"])
+# 
+#         # Create DB entries for tenant (restore from metadata)
+#         WorkloadPolicy._restoreMetadataDB(context, actions,
+#                                           stack_created_resources)
+        # clean stack - decided to be admin manuall
 
         return policy_status
 

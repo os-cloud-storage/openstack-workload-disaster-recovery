@@ -25,16 +25,15 @@ for more details.
 
 import uuid
 
-from oslo.config import cfg
-# from oslo_log import log as logging
-from oslo.utils import importutils
-from oslo.utils import units
+from oslo_config import cfg
+from oslo_log import log as logging
+from oslo_utils import importutils
+from oslo_utils import units
 import six
 
 
 from cinder import exception
 from cinder.i18n import _, _LW
-from cinder.openstack.common import log as logging
 from cinder.volume import driver
 from cinder import context
 
@@ -56,10 +55,6 @@ drbd_opts = [
     cfg.StrOpt('drbdmanage_redundancy',
                default='2',
                help='Number of nodes that should replicate the data.'),
-    cfg.StrOpt('volume_group',
-               default='cinder-volumes',
-               help='Name for the VG that will contain exported volumes'),
-
     # TODO(PM): offsite_redundancy?
     # TODO(PM): choose DRBDmanage storage pool?
 ]
@@ -71,10 +66,9 @@ CONF.register_opts(drbd_opts)
 
 CINDER_AUX_PROP_id = "cinder-id"
 DM_VN_PREFIX = 'CV_'  # sadly 2CV isn't allowed by DRBDmanage
-DM_VN_SUFFIX = '_00'
 
 
-class DrbdManageDriver(driver.ISCSIDriver): # VolumeDriver):
+class DrbdManageDriver(driver.VolumeDriver):
     """Cinder driver that uses DRBDmanage as data store.
     """
 
@@ -84,8 +78,6 @@ class DrbdManageDriver(driver.ISCSIDriver): # VolumeDriver):
 
     def __init__(self, execute=None, *args, **kwargs):
         self.empty_list = dbus.Array([], signature="a(ss)")
-        # TODO(Oshrit): Adapt to Juno
-        self.target_helper = self.get_target_helper(kwargs.get('db'))
         super(DrbdManageDriver, self).__init__(*args, **kwargs)
         if self.configuration:
             self.configuration.append_config_values(drbd_opts)
@@ -97,21 +89,23 @@ class DrbdManageDriver(driver.ISCSIDriver): # VolumeDriver):
                                                  'drbdmanage_redundancy', 1))
         self.dm_control_vol = ".drbdctrl"
 
+        self.target_driver = self.get_target_helper(kwargs.get('db'))
+
         # Copied from the LVM driver, see
         # I43190d1dac33748fe55fa00f260f32ab209be656
         # target_driver = \
-        #     self.target_mapping[self.configuration.safe_get('iscsi_helper')]
+        #    self.target_mapping[self.configuration.safe_get('iscsi_helper')]
+        
 
-        LOG.info('Attempting to initialize DRBD driver with the '
+        LOG.debug('Attempting to initialize DRBD driver with the '
                   'following target_driver: %s',
-		  kwargs.get('db'))
+                  target_driver)
 
-	LOG.info("target_driver drbd %s" % (self.target_helper))
-	# importutils.import_object(
-        #    target_driver,
-        #    configuration=self.configuration,
-        #    db=self.db,
-        #    executor=self._execute)
+        # self.target_driver = importutils.import_object(
+        #     target_driver,
+        #     configuration=self.configuration,
+        #     db=self.db,
+        #     executor=self._execute)
 
     def dbus_connect(self):
         self.odm = dbus.SystemBus().get_object(self.drbdmanage_dbus_name,
@@ -188,7 +182,7 @@ class DrbdManageDriver(driver.ISCSIDriver): # VolumeDriver):
         try:
             if name.startswith(CONF.volume_name_template % "") and \
                     uuid.UUID(name[7:]) is not None:
-                return DM_VN_PREFIX + name[7:] + DM_VN_SUFFIX
+                return DM_VN_PREFIX + name[7:]
         except ValueError:
             return None
 
@@ -347,11 +341,13 @@ class DrbdManageDriver(driver.ISCSIDriver): # VolumeDriver):
         """Checks if a volume whose name_id is equal to lv_id
         already exists on host
         """
-        
+        print 'Check if volume exists' 
         ctx = context.get_admin_context()
         volumes = self.db.volume_get_all_by_host(ctx, self.host)
         for v in volumes:
             if v.name_id == lv_id:
+	       print "vol dir %s" % dir(v)
+               print "id %s exists on volume %s"%(lv_id, v['id']) 
                return True        
  
         return False
@@ -363,7 +359,7 @@ class DrbdManageDriver(driver.ISCSIDriver): # VolumeDriver):
         Renames the LV to match the expected name for the volume.
         Error checking done by manage_existing_get_size is not repeated.
         """
-        lv_id = existing_ref['source-name']
+        lv_id = existing_ref['source-id']
 
         return { 'name_id': lv_id }
     
@@ -376,11 +372,11 @@ class DrbdManageDriver(driver.ISCSIDriver): # VolumeDriver):
         """
 
         # Check that the reference is valid
-        if 'source-name' not in existing_ref:
-            reason = _('Reference must contain source-id element.')
+        if 'source-id' not in existing_ref:
+            reason = _('Reference must contain source-name element.')
             raise exception.ManageExistingInvalidReference(
                 existing_ref=existing_ref, reason=reason)
-        lv_id = existing_ref['source-name']
+        lv_id = existing_ref['source-id']
 
         if self.volume_exists_on_current_host(lv_id):
           kwargs = {'existing_ref': lv_id,
@@ -556,53 +552,29 @@ class DrbdManageDriver(driver.ISCSIDriver): # VolumeDriver):
 
     def ensure_export(self, context, volume):
         volume_path = self.local_path(volume)
-
-        volume_name = self.is_clean_volume_name(volume['name'])
-        iscsi_name = "%s%s" % (self.configuration.iscsi_target_prefix,
-                               volume_name)
-        volume_path = "/dev/%s/%s" % (self.configuration.volume_group,
-                                      volume_name)
-
-	
-
-        # NOTE(jdg): For TgtAdm case iscsi_name is the ONLY param we need
-        # should clean this all up at some point in the future
-        model_update = self.target_helper.ensure_export(
-            context, volume,
-            iscsi_name,
-            volume_path,
-            self.configuration.volume_group,
-            self.configuration)
-        if model_update:
-            self.db.volume_update(context, volume['id'], model_update)
-
-	LOG.info("ensure export %s %s %s %s %s %s" % (context, volume,
-            iscsi_name,
-            volume_path,
-            self.configuration.volume_group,
-            self.configuration))
-
-        # return self.target_driver.ensure_export(
-        #    context,
-        #    volume,
-        #    volume_path)
-
-    def create_export(self, context, volume, vg=None):
-        if vg is None: # Juno
-            vg = self.configuration.volume_group
-        volume_path = self.local_path(volume)
-
-        export_info = self.target_helper.create_export(
+        return self.target_driver.ensure_export(
             context,
             volume,
-            volume_path,
-	    self.configuration)
+            volume_path)
+
+    def create_export(self, context, volume):
+        volume_path = self.local_path(volume)
+        export_info = self.target_driver.create_export(
+            context,
+            volume,
+            volume_path)
 
         return {'provider_location': export_info['location'],
                 'provider_auth': export_info['auth'], }
 
     def remove_export(self, context, volume):
-        return self.target_helper.remove_export(context, volume)
+        return self.target_driver.remove_export(context, volume)
+
+    def initialize_connection(self, volume, connector):
+        return self.target_driver.initialize_connection(volume, connector)
+
+    def validate_connector(self, connector):
+        return self.target_driver.validate_connector(connector)
 
     def terminate_connection(self, volume, connector, **kwargs):
         return None

@@ -21,7 +21,7 @@ from dragon.workload_policy.actions import action
 from dragon.workload_policy.actions import action_execution as ae
 from oslo.config import cfg
 from eventlet import greenthread
-from dragon.template.heat_template import VolumeResource
+from dragon.template.heat_template import HeatVolumeResource
 
 LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
@@ -35,6 +35,7 @@ class VolumeSnapshotAction(action.Action):
         self._name = None
         self._id = None
         self._backup_id = None
+        self._resource_id = None
         # super(action.Action, self).__init__(workload_action_excution_id)
 
     def protect(self, cntx, workload_action_excution_id, resource_id,
@@ -43,6 +44,7 @@ class VolumeSnapshotAction(action.Action):
 
         self._name = volume.name
         self._id = volume.id
+        self._resource_id = resource_id
 
         volume_snapshot_exection =\
             ae.ActionExecution(workload_action_excution_id,
@@ -96,11 +98,15 @@ class VolumeSnapshotAction(action.Action):
         clone_metadata = clone_volume.metadata
         action_excution.set_status(context, 'cloning')
 
+        LOG.debug("clone_volume.id %s" % (clone_volume.id))
         temp_vol = c_client.volumes.get(clone_volume.id)
+        #LOG.debug("temp_vol.status %s" % (temp_vol.status))
 
+        backup_rec = None
         while (temp_vol.status == "creating"):
             greenthread.sleep(1)
             temp_vol = c_client.volumes.get(clone_volume.id)
+            #LOG.debug("temp_vol.status %s" % (temp_vol.status))
         if temp_vol.status == "available":
             LOG.debug("creating backup %s" % (clone_volume.id))
             backup_store = c_client.backups.create(clone_volume.id,
@@ -109,10 +115,11 @@ class VolumeSnapshotAction(action.Action):
             action_excution.set_status(context, 'backup')
             temp_back = c_client.backups.get(backup_store.id)
             self._backup_id = backup_store.id
+            #LOG.debug("temp_back.status %s" % (temp_back.status))
             while temp_back.status == "creating":
                 greenthread.sleep(1)
                 temp_back = c_client.backups.get(backup_store.id)
-            backup_rec = None
+                #LOG.debug("temp_back.status %s" % (temp_back.status))
             if temp_back.status == "available":
                 metadata['clone_backup_id'] = backup_store.id
                 LOG.debug("exporting backup %s" % (backup_store.id))
@@ -128,6 +135,7 @@ class VolumeSnapshotAction(action.Action):
             dr_state = 'DR clone failed'
 
         action_excution.set_status(context, dr_state)
+        LOG.debug("dr_state %s" % (dr_state))
         return dr_state, backup_rec
 
     def _cleanup(self, context, client, snapshot_id, backup_id):

@@ -23,7 +23,7 @@ from dragon.workload_policy.actions import action
 from dragon.workload_policy.actions import action_execution as ae
 from oslo.config import cfg
 from eventlet import greenthread
-from dragon.template.heat_template import VolumeResource
+from dragon.template.heat_template import ReplicatedVolumeResource
 
 LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
@@ -36,14 +36,16 @@ class VolumeReplicationAction(action.Action):
         self.clients = Clients(context)
         self._name = None
         self._id = None
+        self._resource_id = None
 
     def protect(self, context, workload_action_excution_id, resource_id,
                 container_name):
         volume = self.clients.cinder().volumes.get(resource_id)
 
-        self._name = volume.display_name
+        self._name = volume.name
         self._id = volume.id
-
+        self._resource_id = resource_id
+        
         volume_snapshot_exection =\
             ae.ActionExecution(workload_action_excution_id,
                                resource_id, self.id)
@@ -60,14 +62,18 @@ class VolumeReplicationAction(action.Action):
         return dr_state, backup_rec
 
     def generate_template(self, context, template_gen):
-        resource = ParamVolumeResource(self._name, self._id)
-        template_gen.add_volume(resource)
+        resource = ReplicatedVolumeResource(self._name, self._id)
+        template_gen.add_replicated_volume(resource)
 
     def failover(self, context, resource_id, resource_data, container_name):
         #TODO(IBM): cleanup on failure 
         #TODO(IBM): Check volume_id does not already exist in the drbddriver code
         #TODO(IBM): drbd_manage can be constructed from CONF
+        LOG.debug("volume_replication failover: resource_id = %s" % (resource_id))
+        LOG.debug("volume_replication failover: resource_data = %s" % (resource_data))
+        LOG.debug("volume_replication failover: container_name = %s" % (container_name))
         drbd_manage = platform.node() + "@" + resource_data["volume_type"] + "#drbdmanage"
+        LOG.debug("volume_replication failover: drbd_manage = %s" % (drbd_manage))
         try:
             #  def manage(self, host, ref, name=None, description=None,
             #   volume_type=None, availability_zone=None, metadata=None,
@@ -75,14 +81,18 @@ class VolumeReplicationAction(action.Action):
             # cinder manage   --source-id 3956b0d7-010d-4eca-b45d-7a1d0bca9cae 
             #   --volume-type drbddriver-1  drbd0@drbddriver-1#drbdmanage
             ref_dict = {}
-            ref_dict['source-name'] = resource_data["volume_name"]
+            #ref_dict['source-name'] = resource_data["volume_name"]
+            ref_dict['source-name'] = resource_id
             ref_dict['source-id'] = resource_id
 
-            self.clients.cinder().volumes.manage(drbd_manage,
+            LOG.debug("volume_replication failover: ref_dict = %s" % (ref_dict))
+            # if volume type is drbd, ensure that the volume is imported to cinder 
+            ret = self.clients.cinder().volumes.manage(drbd_manage,
                                                  ref_dict,
                                                  name = resource_data["volume_name"],
                                                  volume_type = resource_data["volume_type"],
                                                  metadata = resource_data["metadata"])
+            LOG.debug("volume_replication failover: ret = %s" % (ret))
             return True
         except Exception, e:
             LOG.error(e)

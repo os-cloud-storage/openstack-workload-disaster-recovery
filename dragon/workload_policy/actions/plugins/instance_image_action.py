@@ -48,6 +48,7 @@ class InstanceImageAction(action.Action):
         self.clients = Clients(context)
         self._image_id = None
         self._name = None
+        self._resource_id = None
         self.data_block_size_bytes = CONF.backup_image_object_size
         # super(action.Action, self).__init__(workload_action_excution_id)
 
@@ -65,6 +66,7 @@ class InstanceImageAction(action.Action):
         instance = self.clients.nova().servers.get(resource_id)
         self._image_id = instance.image['id']
         self._name = instance.name
+        self._resource_id = resource_id
 
         instance_copy_execution =\
             ae.ActionExecution(workload_action_excution_id,
@@ -74,7 +76,7 @@ class InstanceImageAction(action.Action):
         return result
 
     def generate_template(self, context, template_gen):
-        instance = InstanceResource(self._image_id, self._name)
+        instance = InstanceResource(self._image_id, self._name, resource_id=self._resource_id)
         template_gen.add_instance(instance)
 
     def failover(self, context, resource_id, resource_data, container_name):

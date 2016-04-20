@@ -49,6 +49,7 @@ class InstanceSnapshotAction(action.Action):
         self._snap_id = None
         self._image_id = None
         self._name = None
+        self._resource_id = None
         self.data_block_size_bytes = CONF.backup_snapshot_object_size
         # super(action.Action, self).__init__(workload_action_excution_id)
 
@@ -81,6 +82,7 @@ class InstanceSnapshotAction(action.Action):
         instance = self.clients.nova().servers.get(resource_id)
         self._image_id = instance.image['id']
         self._name = instance.name
+        self._resource_id = resource_id
         instance_snapshot_exection =\
             ae.ActionExecution(workload_action_excution_id,
                                resource_id, self.id)
@@ -89,7 +91,7 @@ class InstanceSnapshotAction(action.Action):
         return result
 
     def generate_template(self, context, template_gen):
-        instance = InstanceResource(self._image_id, self._name)
+        instance = InstanceResource(self._image_id, self._name, resource_id=self._resource_id)
         template_gen.add_instance(instance)
 
     def failover(self, context, resource_id, resource_data, container_name):
