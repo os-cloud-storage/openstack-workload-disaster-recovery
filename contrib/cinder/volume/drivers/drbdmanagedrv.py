@@ -188,7 +188,7 @@ class DrbdManageDriver(driver.ISCSIDriver): # VolumeDriver):
         try:
             if name.startswith(CONF.volume_name_template % "") and \
                     uuid.UUID(name[7:]) is not None:
-                return DM_VN_PREFIX + name[7:] + DM_VN_SUFFIX
+                return DM_VN_PREFIX + name[7:]
         except ValueError:
             return None
 
